@@ -1,9 +1,19 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 
-
+const isRed = true;
 ---
 
 <MainLayout title="My Blog", description="Hi from Home">
-	<p>Hi from Astro!</p>
+	<p class:list={[{red: isRed}]}>Hi from Astro!</p>
 </MainLayout>
+
+<style>
+	p {
+		font-size: 4rem;
+	}
+
+	.red{
+		color: red;
+	}
+</style>
