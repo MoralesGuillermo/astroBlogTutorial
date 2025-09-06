@@ -1,6 +1,7 @@
 ---
 import MainHead from './MainHead.astro';
-
+import Footer from "../components/Footer.astro";
+import Nav from '../components/Nav.astro';
 // sytle import
 import "../styles/global.css"
 
@@ -13,11 +14,10 @@ const {title = "My Astro Blog", description = "This is a blog"} = Astro.props as
 <html lang="en">
 	<MainHead {title} {description} />
 	<body>
+		<Nav />
 		<slot>
             Default text
         </slot>
-		<slot name="description">
-			{description}
-		</slot>
+	<Footer />
 	</body>
 </html>
