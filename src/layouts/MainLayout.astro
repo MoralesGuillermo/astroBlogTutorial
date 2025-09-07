@@ -15,9 +15,9 @@ const {title = "My Astro Blog", description = "This is a blog"} = Astro.props as
 	<MainHead {title} {description} />
 	<body>
 		<Nav />
-		<slot>
-            Default text
-        </slot>
+		<main>
+			<slot>Default text</slot>
+		</main>
 	<Footer />
 	</body>
 </html>

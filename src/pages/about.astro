@@ -1,4 +1,5 @@
 ---
+import Link from "../components/Link.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 
 const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
@@ -6,5 +7,13 @@ const data = await res.json();
 ---
 
 <MainLayout title="My Blog", description="Astro Project">
-	<p>Hi from about!</p>
+	<section class="container about" aria-label="About me">
+		<img src="/images/headshot.jpg" alt="My headshot" width="200" height="330">
+		<div class="content">
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt culpa, aliquam repellendus in recusandae ratione eos nesciunt adipisci praesentium quam est architecto ut dolore? Consequatur consectetur et ut voluptatem nobis.
+			</p>
+			<Link href="mailto:morales.guillermo2503@gmail.com" style="primary" text="Contact me"/>
+		</div>
+	</section>
 </MainLayout>

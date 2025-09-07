@@ -1,0 +1,32 @@
+---
+import Link from "../components/Link.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5");
+const data = await res.json();
+---
+
+<MainLayout title="Page not found", description="Astro Project">
+	<div class="container" style={{
+        display: "grid",
+        placeItems: "center",
+        textAlign: "center",
+        gap: "var(--small-sm)"
+    }}>
+    <div>
+        <h1 class="h1">Welp, this is awkward!</h1>
+        <p>The requested page was not found</p>
+    </div>
+    <Link 
+        href="/" 
+        style="secondary" 
+        text="Go home" 
+        icon={
+            {
+                name: "material-symbols:house-outline",
+                side: "right"        
+            }
+        }
+    />
+    </div>
+</MainLayout>
