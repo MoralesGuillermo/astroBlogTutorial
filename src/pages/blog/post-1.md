@@ -1,5 +1,6 @@
 ---
-
+## layout will be the astro layout that will be aplied to this content
+layout: "../../layouts/BlogPostLayout.astro"
 title: A Post about Important Items Of Life
 date: 2022-11-20
 author: Darnell McClure

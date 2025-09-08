@@ -1,0 +1,29 @@
+---
+
+import PostHeader from "../components/PostHeader.astro";
+import MainLayout from "./MainLayout.astro";
+
+
+// All the variables in the blogs will be past through props
+const { frontmatter } = Astro.props;
+
+
+const {title, description, date, category, author, image} = frontmatter;
+---
+
+
+<MainLayout {title} {description}>
+    <PostHeader 
+        {title} 
+        {date}
+        {category} 
+        {author}
+        {image} 
+    />
+    <div class="post-content">
+        <div class="content">
+            <slot></slot>
+        </div>
+        <div class="sidebar"></div>
+    </div>
+</MainLayout>
