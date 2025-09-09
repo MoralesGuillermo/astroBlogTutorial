@@ -2,8 +2,12 @@
 import PostCard from "../../components/PostCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
+
+import { formatBlogPosts } from "../../js/utils";
+
 // Get all the posts of the project (all md files)
 const allPosts = await Astro.glob("./*.md")
+const formatedPosts = formatBlogPosts(allPosts);
 
 const tagType = "h2"
 ---
@@ -13,12 +17,12 @@ const tagType = "h2"
 		<h1 class="h1">New Blog Posts</h1>
 		<div class="post-container">
 			{
-				allPosts.map((post) =>
-				<PostCard
-					{post}
-					{tagType}
-				/>
-			)
+				formatedPosts.map((post: unknown) =>
+					<PostCard
+						{post}
+						{tagType}
+					/>
+				)
 			}
 		</div>
 	</section>

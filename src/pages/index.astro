@@ -1,9 +1,44 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import Link from "../components/Link.astro";
+
+import { formatBlogPosts } from "../js/utils";
+
+// Get all the posts of the project (all md files)
+const allPosts = await Astro.glob("./blog/*.md")
+const formatedPosts = formatBlogPosts(allPosts, {limit: 3});
+
+const tagType = "h3"
 
 const isRed = false;
 ---
 
 <MainLayout title="My Blog", description="Astro Project">
-	<p class:list={[{red: isRed}]}>Hi from home!</p>
+	<section class="container about" aria-label="About me">
+		<img src="/images/headshot.jpg" alt="My headshot" width="200" height="330">
+		<div class="content">
+			<h1 class="h1">My Blog</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt culpa, aliquam repellendus in recusandae ratione eos nesciunt adipisci praesentium quam est architecto ut dolore? Consequatur consectetur et ut voluptatem nobis.
+			</p>
+			<Link 
+				href="/about" 
+				style="secondary" 
+				text="👋Say Hello!"/>
+		</div>
+	</section>
+	<section class="container" aria-label="New Blog Posts">
+		<h2 class="h1">New Blog Posts</h2>
+		<div class="post-container">
+			{
+				formatedPosts.map((post: unknown) =>
+					<PostCard
+						{post}
+						{tagType}
+					/>
+				)
+			}
+		</div>
+	</section>
 </MainLayout>
