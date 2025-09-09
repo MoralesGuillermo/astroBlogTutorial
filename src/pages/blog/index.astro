@@ -7,7 +7,7 @@ import { formatBlogPosts } from "../../js/utils";
 
 // Get all the posts of the project (all md files)
 const allPosts = await Astro.glob("./*.md")
-const formatedPosts = formatBlogPosts(allPosts);
+const formattedPosts = formatBlogPosts(allPosts);
 
 const tagType = "h2"
 ---
@@ -17,7 +17,7 @@ const tagType = "h2"
 		<h1 class="h1">New Blog Posts</h1>
 		<div class="post-container">
 			{
-				formatedPosts.map((post: unknown) =>
+				formattedPosts.map((post: unknown) =>
 					<PostCard
 						{post}
 						{tagType}
