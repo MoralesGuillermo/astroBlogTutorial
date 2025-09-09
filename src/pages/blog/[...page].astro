@@ -1,15 +1,28 @@
 ---
+import type { GetStaticPaths } from "astro";
 import PostCard from "../../components/PostCard.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
 
 import { formatBlogPosts } from "../../js/utils";
+import Pagination from "../../components/Pagination.astro";
 
+
+export const getStaticPaths = (async ({paginate}) => {
+	const allPosts = await Astro.glob("./*.md")
+	const formattedPosts = formatBlogPosts(allPosts);
+	
+	return paginate(formattedPosts, {
+		pageSize: 3,
+	});
+}) satisfies GetStaticPaths;
 // Get all the posts of the project (all md files)
-const allPosts = await Astro.glob("./*.md")
-const formattedPosts = formatBlogPosts(allPosts);
 
+
+const { page } = Astro.props
 const tagType = "h2"
+
+console.log(page)
 ---
 
 <MainLayout title="My Blog", description="Astro Project">
@@ -17,7 +30,7 @@ const tagType = "h2"
 		<h1 class="h1">New Blog Posts</h1>
 		<div class="post-container">
 			{
-				formattedPosts.map((post: unknown) =>
+				page.data.map((post: unknown) =>
 					<PostCard
 						{post}
 						{tagType}
@@ -25,5 +38,9 @@ const tagType = "h2"
 				)
 			}
 		</div>
+		<Pagination 
+			prevUrl={page.url.prev}
+			nextUrl={page.url.next}
+		/>
 	</section>
 </MainLayout>
